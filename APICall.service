@@ -1,0 +1,13 @@
+[Unit]
+Description = Python API
+After = networl.target
+[Service]
+User = pxs406
+Group = pxs406
+WorkingDirectory = /home/pxs406/workcpsc/CPSC222/
+ExecStart = /usr/bin/python3 /home/pxs406/workcpsc/CPSC222/
+Description = Python API
+After = network.target
+[Install]
+WantedBy = multi-user.target
+Restart = always
