@@ -2,7 +2,18 @@ server {
 
 	listen 80;
 	server_name 10.0.2.15;
+
+	return 301 https://$hort$request_url;
+}
+
+server {
+
+	listen 443 ssl;
+	server_name 10.0.2.15;
 	
+	ssl_certificate /home/pxs406/CPSC222/server.crt
+	ssl_crtificate_key /home/pxs406/CPSC222/server.key
+
 	location /{
 
 	proxy_pass http://127.0.0.1:3000;
