@@ -1,0 +1,16 @@
+[Unit]
+
+Description = Python API Service
+After = network.target
+
+[Service]
+
+User = Pxs406 
+Group = Pxs406
+WorkingDirectory = /home/pxs406/CPSC222/
+ExecStart = /usr/bin/python3 /home/pxs406/CPSC222/UserLogon.py
+Restart = always
+
+[Install]
+
+WantedBy = mutli-user.target
