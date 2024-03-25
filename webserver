@@ -1,0 +1,38 @@
+server {
+	listen 80;
+	server_name 10.0.2.15;
+        return 301 https://$hort$request_url;
+
+        location /api {
+                proxy_pass http://127.0.0.1:3000;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Fowarded-For $proxy_add_x_fowarded_for;
+                proxy_set_header X-Fowarded-Proto $scheme;
+                }
+}
+
+server {
+
+        listen 443 ssl;
+        server_name 10.0.2.15;
+
+        root /var/www/html;
+        index index.html foo.php;
+
+        ssl_certificate /home/pxs406/CPSC222/server.crt;
+        ssl_crtificate_key /home/pxs406/CPSC222/server.key;
+
+        location /{
+                try_files $uri $uri/ =404;
+        }
+
+        location ~ \.php$ {
+                include snippets/fastcgi-php.conf;
+                fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+        }
+
+        location ~ /\.ht {
+                deny all;
+        }
+}
